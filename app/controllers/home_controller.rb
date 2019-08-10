@@ -1,12 +1,8 @@
 class HomeController < ApplicationController
 
   def index
+    presenter = ::Home::IndexPresenter.new(self)
 
-    require 'nokogiri'
-    require 'open-uri'
-
-    # Fetch and parse HTML document
-    @doc = Nokogiri::HTML(open('https://www.facebook.com/pg/CMOKerala/posts/'))
-
+    render json: presenter.props
   end
 end
