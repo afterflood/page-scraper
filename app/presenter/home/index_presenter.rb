@@ -3,6 +3,7 @@ module Home
     def props
       Message.all.includes(:page).map do |m|
         {
+          id: m.id,
           message: m.message,
           page_name: m.page.name
         }
