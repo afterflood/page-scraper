@@ -1,7 +1,7 @@
 module Home
   class IndexPresenter < ::ApplicationPresenter
     def props
-      Message.all.where.not(archived: true).includes(:page).map do |m|
+      Message.all.where.not(archived: true).includes(:page).reverse.map do |m|
         data = {
           id: m.id,
           message: m.message,
