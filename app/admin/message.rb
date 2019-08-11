@@ -1,5 +1,5 @@
 ActiveAdmin.register Message do
-  permit_params :message, :page_id, :image_url, :archived
+  permit_params :message, :page_id, :url, :archived
 
   index do
     selectable_column
@@ -12,12 +12,13 @@ ActiveAdmin.register Message do
 
   filter :message
   filter :page
+  filter :archived
 
   form do |f|
     f.inputs do
       f.input :message
       f.input :page
-      f.input :image_url
+      f.input :url
       f.input :archived
     end
     f.actions
