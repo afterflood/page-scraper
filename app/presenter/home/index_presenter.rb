@@ -8,14 +8,14 @@ module Home
           page_name: m.page.name
         }
 
-        data[:image] = image(m) if m.image_url.present?
+        data[:image] = image(m) if m.url.present?
         data
       end.to_json
     end
 
     def image(message)
       {
-        url: message.image_url
+        url: message.url
       }
     end
   end
