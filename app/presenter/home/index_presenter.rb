@@ -5,7 +5,8 @@ module Home
         data = {
           id: m.id,
           message: m.message,
-          page_name: m.page.name
+          page_name: m.page.name,
+          date: m.created_at.strftime("%F")
         }
 
         data[:image] = image(m) if m.url.present?
