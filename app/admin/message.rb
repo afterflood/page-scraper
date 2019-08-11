@@ -1,24 +1,25 @@
 ActiveAdmin.register Message do
-  permit_params :name, :url
+  permit_params :message, :page_id, :image_url, :archived
 
   index do
     selectable_column
     id_column
-    column :name
-    column :url
+    column :message
+    column :page
     column :created_at
     actions
   end
 
-  filter :name
-  filter :created_at
+  filter :message
+  filter :page
 
   form do |f|
     f.inputs do
-      f.input :name
-      f.input :url
+      f.input :message
+      f.input :page
+      f.input :image_url
+      f.input :archived
     end
     f.actions
   end
-
 end
