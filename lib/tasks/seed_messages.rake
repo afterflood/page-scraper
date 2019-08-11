@@ -8,7 +8,7 @@ task seed_messages: :environment do
     @doc = Nokogiri::HTML(open(page.url))
     @doc.css('div[data-testid="post_message"]').each do |link|
       @messages = page.messages.pluck(:message)
-      next if link.in? @messages
+      next if link.content.in? @messages
 
       page.messages.create!(message: link.content)
     end
