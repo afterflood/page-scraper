@@ -1,7 +1,7 @@
 module Home
-  class ApiPresenter < ::ApplicationPresenter
+  class FullPresenter < ::ApplicationPresenter
     def props
-      Stream.all.includes(:page).order('created_time DESC').take(10).map do |s|
+      Stream.all.includes(:page).order('created_time DESC').map do |s|
         fb_id = s.fb_id.split('_')
         {
           page_id: fb_id.first,

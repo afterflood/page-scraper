@@ -11,4 +11,10 @@ class HomeController < ApplicationController
 
     render json: presenter.props
   end
+
+  def full
+    presenter = ::Home::FullPresenter.new(self)
+
+    render json: presenter.props
+  end
 end
