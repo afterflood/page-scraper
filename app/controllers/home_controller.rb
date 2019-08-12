@@ -5,4 +5,10 @@ class HomeController < ApplicationController
 
     render json: presenter.props
   end
+
+  def api
+    presenter = ::Home::ApiPresenter.new(self)
+
+    render json: presenter.props
+  end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_11_102504) do
+ActiveRecord::Schema.define(version: 2019_08_12_141609) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,15 @@ ActiveRecord::Schema.define(version: 2019_08_11_102504) do
     t.string "url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "page_uuid"
+    t.string "token"
+  end
+
+  create_table "streams", force: :cascade do |t|
+    t.string "fb_id"
+    t.string "created_time"
+    t.bigint "page_id", null: false
+    t.index ["page_id"], name: "index_streams_on_page_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -71,4 +80,5 @@ ActiveRecord::Schema.define(version: 2019_08_11_102504) do
   end
 
   add_foreign_key "messages", "pages"
+  add_foreign_key "streams", "pages"
 end

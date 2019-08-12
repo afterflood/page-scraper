@@ -1,18 +1,18 @@
-require 'nokogiri'
-require 'open-uri'
+require 'net/http'
+require 'uri'
+require 'json'
 
 desc 'Seed Messages'
 task seed_messages: :environment do
-  # Fetch and parse HTML document
+
+  url = "https://graph.facebook.com/v4.0"
   Page.all.each do |page|
-    messages = page.messages.pluck(:message)
-    @doc = Nokogiri::HTML(open(page.url))
-    @doc.css('div[data-testid="post_message"]').reverse.each do |link|
-      next if link.content.nil?
+    response = HTTParty.get("#{url}/#{page.page_uuid}/feed?access_token=#{page.token}")
+    response_json = JSON.parse(response.body)
+    response_json["data"].each do |link|
+      next if Stream.where(fb_id: link["id"]).any?
 
-      next if link.content.in? messages
-
-      page.messages.create!(message: link.content)
+      page.streams.create!(fb_id: link["id"], created_time: link["created_time"])
     end
   end
 end

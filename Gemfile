@@ -31,6 +31,8 @@ gem 'devise'
 
 gem 'activeadmin'
 
+gem 'httparty'
+
 gem "ransack", github: "activerecord-hackery/ransack", ref: "aada8"
 
 # Reduces boot times through caching; required in config/boot.rb
