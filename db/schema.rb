@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_12_141609) do
+ActiveRecord::Schema.define(version: 2019_08_13_123525) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,8 @@ ActiveRecord::Schema.define(version: 2019_08_12_141609) do
     t.string "fb_id"
     t.string "created_time"
     t.bigint "page_id", null: false
+    t.boolean "archived", default: false
+    t.string "story"
     t.index ["page_id"], name: "index_streams_on_page_id"
   end
 

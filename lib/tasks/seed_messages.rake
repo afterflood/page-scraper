@@ -12,7 +12,9 @@ task seed_messages: :environment do
     response_json["data"].each do |link|
       next if Stream.where(fb_id: link["id"]).any?
 
-      page.streams.create!(fb_id: link["id"], created_time: link["created_time"])
+      stream = page.streams.create!(fb_id: link["id"], created_time: link["created_time"])
+      stream.update!(story: link["story"]) if link["story"].present?
+      stream.update!(story: link["message"]) if link["message"].present?
     end
   end
 end
